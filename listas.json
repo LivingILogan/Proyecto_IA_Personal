@@ -1,8 +1,34 @@
-{
-    "nombre_lista": "Lista de compras",
-    "tareas": [
-        "leche",
-        " pan",
-        " huevos"
-    ]
-}
+[
+    {
+        "nombre_lista": "compras, juegos, peliculas",
+        "tareas": [
+            "compras",
+            "juegos",
+            "peliculas"
+        ]
+    },
+    {
+        "nombre_lista": "compras",
+        "tareas": [
+            "juegos",
+            "peliculas",
+            "series"
+        ]
+    },
+    {
+        "nombre_lista": "juegos",
+        "tareas": [
+            "minecraft",
+            "batterfield",
+            "pes"
+        ]
+    },
+    {
+        "nombre_lista": "series",
+        "tareas": [
+            "dhamer",
+            "invinvible",
+            "the goo doctor"
+        ]
+    }
+]
