@@ -1,7 +1,12 @@
 # Archivo: ia_asistente.py
 
-# Se importa la biblioteca json para guardar los datos de forma estructurada.
+# Se importan las librerías necesarias
 import json
+import sys
+import os
+import pyautogui
+import psutil
+import shutil
 
 def guardar_lista(data):
     # Se abre el archivo de datos en modo de escritura ('w').
@@ -37,6 +42,72 @@ def borrar_tareas(nombre, tareas_a_borrar):
                 guardar_lista(listas)
                 return True
     return False
+
+def abrir_programa(nombre_programa):
+    # Detecta el sistema operativo y ejecuta el comando correcto
+    if sys.platform == 'win32':
+        # Comando para Windows
+        os.system(f'start {nombre_programa}')
+    elif sys.platform == 'darwin':
+        # Comando para macOS
+        os.system(f'open -a {nombre_programa}')
+    elif sys.platform == 'linux':
+        # Comando para Linux
+        os.system(f'xdg-open {nombre_programa}')
+
+def cerrar_programa_por_nombre(nombre_programa):
+    for proc in psutil.process_iter():
+        if nombre_programa.lower() in proc.name().lower():
+            proc.kill()
+            return True
+    return False
+
+def crear_carpeta(nombre_carpeta):
+    try:
+        os.makedirs(nombre_carpeta)
+        return True
+    except FileExistsError:
+        return False
+
+def buscar_archivo_o_carpeta(nombre, ruta_busqueda):
+    for root, dirs, files in os.walk(ruta_busqueda):
+        # Busca en los archivos
+        if nombre in files:
+            return os.path.join(root, nombre)
+        # Busca en las carpetas
+        if nombre in dirs:
+            return os.path.join(root, nombre)
+    return None
+
+def mover_a_escritorio(nombre_a_mover):
+    try:
+        # Obtiene la ruta del escritorio del usuario
+        desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
+
+        # Busca el archivo/carpeta desde la carpeta del usuario
+        ruta_encontrada = buscar_archivo_o_carpeta(nombre_a_mover, os.path.expanduser('~'))
+
+        if ruta_encontrada:
+            shutil.move(ruta_encontrada, desktop_path)
+            return True
+        else:
+            return False
+    except OSError as e:
+        print(f"Error al intentar mover: {e}")
+        return False
+
+def borrar_archivo_o_carpeta(ruta_completa_a_eliminar):
+    try:
+        if os.path.isdir(ruta_completa_a_eliminar):
+            shutil.rmtree(ruta_completa_a_eliminar)
+        elif os.path.isfile(ruta_completa_a_eliminar):
+            os.remove(ruta_completa_a_eliminar)
+        return True
+    except FileNotFoundError:
+        return False
+    except OSError as e:
+        print(f"Error al intentar eliminar: {e}")
+        return False
 
 def main():
     entrada_usuario = input("Hola, soy tu IA. ¿Qué necesitas que haga por ti? ")
@@ -111,6 +182,74 @@ def main():
                 print("No pude borrar las tareas. ¿Estás seguro de que la lista existe?")
         else:
             print("No tienes ninguna lista creada para borrar.")
+
+    # La IA aprende a abrir programas.
+    elif "abrir" in entrada_usuario.lower():
+        print("¡Claro! ¿Qué programa o aplicación te gustaría abrir?")
+        nombre_programa = input("Nombre del programa: ")
+        
+        abrir_programa(nombre_programa)
+        print(f"Hecho, he abierto {nombre_programa}.")
+
+    # La IA aprende a cerrar programas.
+    elif "cerrar" in entrada_usuario.lower():
+        print("¡Claro! ¿Qué programa te gustaría cerrar?")
+        nombre_programa = input("Nombre del programa: ")
+
+        if cerrar_programa_por_nombre(nombre_programa):
+            print(f"Hecho, he cerrado {nombre_programa}.")
+        else:
+            print(f"No pude encontrar un programa con el nombre '{nombre_programa}' para cerrar.")
+            
+    # La IA aprende a crear carpetas.
+    elif "crear carpeta" in entrada_usuario.lower() or "crea una carpeta" in entrada_usuario.lower():
+        print("¡Claro! ¿Qué nombre le ponemos a la carpeta?")
+        nombre_carpeta = input("Nombre de la carpeta: ")
+
+        if crear_carpeta(nombre_carpeta):
+            print(f"Hecho, he creado la carpeta '{nombre_carpeta}'.")
+        else:
+            print(f"La carpeta '{nombre_carpeta}' ya existe o hubo un error al crearla.")
+
+    # La IA aprende a mover carpetas al escritorio.
+    elif "mover" in entrada_usuario.lower() or "mueve" in entrada_usuario.lower():
+        nombre_a_mover = entrada_usuario.split("mover")[-1].split("mueve")[-1].strip().replace("al escritorio", "").strip()
+        print(f"Buscando '{nombre_a_mover}' en tu sistema...")
+        
+        ruta_encontrada = buscar_archivo_o_carpeta(nombre_a_mover, os.path.expanduser('~'))
+
+        if ruta_encontrada:
+            print(f"¡Lo encontré! La ruta es: '{ruta_encontrada}'.")
+            confirmacion = input("¿Quieres moverlo al escritorio? (Sí/No): ")
+            if confirmacion.lower() == 'si' or confirmacion.lower() == 'sí':
+                if mover_a_escritorio(ruta_encontrada):
+                    print(f"Hecho, he movido '{nombre_a_mover}' al escritorio.")
+                else:
+                    print(f"Hubo un error al mover '{nombre_a_mover}'.")
+            else:
+                print("Operación cancelada. El archivo o carpeta no fue movido.")
+        else:
+            print(f"No pude encontrar un archivo o carpeta con el nombre '{nombre_a_mover}'.")
+    
+    # La IA aprende a borrar archivos y carpetas.
+    elif "borrar" in entrada_usuario.lower() or "eliminar" in entrada_usuario.lower() or "quitar" in entrada_usuario.lower():
+        nombre_a_eliminar = entrada_usuario.split("borrar")[-1].split("eliminar")[-1].split("quitar")[-1].strip()
+        print(f"Buscando '{nombre_a_eliminar}' en tu sistema...")
+
+        ruta_encontrada = buscar_archivo_o_carpeta(nombre_a_eliminar, os.path.expanduser('~'))
+
+        if ruta_encontrada:
+            print(f"¡Lo encontré! La ruta es: '{ruta_encontrada}'.")
+            confirmacion = input(f"Advertencia: ¿Estás seguro de que quieres eliminar '{nombre_a_eliminar}'? (Sí/No): ")
+            if confirmacion.lower() == 'si' or confirmacion.lower() == 'sí':
+                if borrar_archivo_o_carpeta(ruta_encontrada):
+                    print(f"Hecho, he eliminado '{nombre_a_eliminar}'.")
+                else:
+                    print(f"Hubo un error al eliminar '{nombre_a_eliminar}'.")
+            else:
+                print("Operación cancelada. El archivo o carpeta no fue eliminado.")
+        else:
+            print(f"No pude encontrar un archivo o carpeta con el nombre '{nombre_a_eliminar}'.")
 
     else:
         print("Hmm, no estoy seguro de cómo ayudarte con eso. ¿Podrías ser más específico?")
