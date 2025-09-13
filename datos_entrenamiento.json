@@ -1,0 +1,146 @@
+[
+    {
+        "comando": "abre el bloc de notas",
+        "accion": "comando_no_reconocido"
+    },
+    {
+        "comando": "buscar en google chrome",
+        "accion": "buscar_en_google"
+    },
+    {
+        "comando": "hola ana abre el bloc de notas",
+        "accion": "comando_no_reconocido"
+    },
+    {
+        "comando": "abrir el bloc de notas y escribe hola soy",
+        "accion": "abrir_programa"
+    },
+    {
+        "comando": "abrir bloc de notas",
+        "accion": "abrir_programa"
+    },
+    {
+        "comando": "escribir 'hola soy ana' en 'bloc de notas'",
+        "accion": "escribir_en_programa"
+    },
+    {
+        "comando": "abrir bloc de notas y escribir 'hola soy ana'",
+        "accion": "abrir_y_escribir"
+    },
+    {
+        "comando": "abrir bloc de notas",
+        "accion": "abrir_programa"
+    },
+    {
+        "comando": "escribir 'prueba de visi\u00f3n' en 'bloc de notas'",
+        "accion": "escribir_en_programa"
+    },
+    {
+        "comando": "abrir bloc de notas y escribir 'prueba de visi\u00f3n'",
+        "accion": "abrir_y_escribir"
+    },
+    {
+        "comando": "buscar y haz clic en archivo",
+        "accion": "comando_no_reconocido"
+    },
+    {
+        "comando": "buscar y haz clic en archivo",
+        "accion": "comando_no_reconocido"
+    },
+    {
+        "comando": "busca y haz clic en archivo",
+        "accion": "comando_no_reconocido"
+    },
+    {
+        "comando": "busca y haz clic en archivo",
+        "accion": "buscar_y_clic_en_texto"
+    },
+    {
+        "comando": "abrir bloc de notas",
+        "accion": "abrir_programa"
+    },
+    {
+        "comando": "escribir 'prueba de guardado' en 'bloc de notas'",
+        "accion": "escribir_en_programa"
+    },
+    {
+        "comando": "abrir bloc de notas y escribir 'prueba de guardado'",
+        "accion": "abrir_y_escribir"
+    },
+    {
+        "comando": "guarda el documento",
+        "accion": "comando_no_reconocido"
+    },
+    {
+        "comando": "abrir bloc de notas",
+        "accion": "abrir_programa"
+    },
+    {
+        "comando": "escribir 'prueba de guardado' en 'bloc de notas'",
+        "accion": "escribir_en_programa"
+    },
+    {
+        "comando": "abrir bloc de notas y escribir 'prueba de guardado'",
+        "accion": "abrir_y_escribir"
+    },
+    {
+        "comando": "guarda el documento",
+        "accion": "comando_no_reconocido"
+    },
+    {
+        "comando": "abrir bloc de notas",
+        "accion": "abrir_programa"
+    },
+    {
+        "comando": "escribir 'prueba de guardado' en 'bloc de notas'",
+        "accion": "escribir_en_programa"
+    },
+    {
+        "comando": "abrir bloc de notas y escribir 'prueba de guardado'",
+        "accion": "abrir_y_escribir"
+    },
+    {
+        "comando": "guarda el documento",
+        "accion": "comando_no_reconocido"
+    },
+    {
+        "comando": "abrir bloc de notas",
+        "accion": "abrir_programa"
+    },
+    {
+        "comando": "escribir 'prueba de guardado' en 'bloc de notas'",
+        "accion": "escribir_en_programa"
+    },
+    {
+        "comando": "abrir bloc de notas y escribir 'prueba de guardado'",
+        "accion": "abrir_y_escribir"
+    },
+    {
+        "comando": "guardar como mi primer archivo.txt",
+        "accion": "guardar_como_archivo"
+    },
+    {
+        "comando": "intentalo de nuevo",
+        "accion": "comando_no_reconocido"
+    },
+    {
+        "comando": "abrir bloc de notas",
+        "accion": "abrir_programa"
+    },
+    {
+        "comando": "escribir 'prueba de guardado' en 'bloc de notas'",
+        "accion": "escribir_en_programa"
+    },
+    {
+        "comando": "abrir bloc de notas y escribir 'prueba de guardado'",
+        "accion": "abrir_y_escribir"
+    },
+    {
+        "comando": "guardar como mi archivo de texto en escritorio",
+        "accion": "guardar_como_archivo_en_ubicacion"
+    },
+    {
+        "comando": "nvestiga sobre los usos de la energ\u00eda solar y guarda en documentos",
+        "accion": "comando_no_reconocido"
+    }
+]
